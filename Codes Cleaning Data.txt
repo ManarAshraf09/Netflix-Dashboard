@@ -1,0 +1,14 @@
+import pandas as pd
+df=pd.read_csv('/content/File 1 (1).csv')
+df
+print(df.isnull().sum())
+df_cleaned = df.dropna(subset=['director', 'cast', 'country', 'date_added', 'rating'])
+df_cleaned = df.dropna()
+df_cleaned = df.drop_duplicates(subset=['show_id', 'title'])
+df['release_year'] = pd.to_numeric(df['release_year'], errors='coerce')
+df_cleaned = df.dropna(subset=['release_year'])
+print(df.isnull().sum())
+print(df.duplicated().sum())
+df.to_csv('cleaned_data.csv', index=False)
+from google.colab import files
+files.download("/content/File 1 (1).csv")
